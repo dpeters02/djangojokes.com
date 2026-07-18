@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Self Created
 
+    'common.apps.CommonConfig',
     'jokes.apps.JokesConfig',
     'pages.apps.PagesConfig',
     
