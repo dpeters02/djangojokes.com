@@ -187,3 +187,8 @@ STATICFILES_DIRS = [
 
 if os.environ.get('ENVIRONMENT') != 'production':
     from .local_settings import *
+
+# MEDIA SETTINGS
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
