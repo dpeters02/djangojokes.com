@@ -63,6 +63,7 @@
             {% else %}
               <th><a href="?order=creator&direction=asc&q={{ request.GET.q }}">Creator</a></th>
             {% endif %}
+            <th>Rating</th>
           </tr>
         {% endwith %}
       </thead>
@@ -73,14 +74,12 @@
               <a href="{{ joke.get_absolute_url }}">{{ joke.question }}</a>
             </td>
             <td>
-              <a href="{% url 'jokes:category' joke.category.slug %}?order={{ order }}
-              &direction={{ direction }}">
+              <a href="{% url 'jokes:category' joke.category.slug %}?order={{ order }}&direction={{ direction }}">
               {{ joke.category.category }}
               </a>
               <br>
               {% for tag in joke.tags.all %}
-                <a href="{% url 'jokes:tag' tag.slug %}?order={{ order }}
-                &direction={{ direction }}"
+                <a href="{% url 'jokes:tag' tag.slug %}?order={{ order }}&direction={{ direction }}"
                 class="badge rounded-pill bg-secondary">
                   {{ tag.tag }}
                 </a>
@@ -96,12 +95,18 @@
               </a>
               {% else %}
               <small>by 
-                <a href="{% url 'jokes:creator' joke.user.username %}?order={{ order }}
-                &direction={{ direction }}">
+                <a href="{% url 'jokes:creator' joke.user.username %}?order={{ order }}&direction={{ direction }}">
                 {{ joke.user.username }}
                 </a>
               </small>
               {% endif %}
+            </td>
+            <td>
+              <div id="rating-container" title="{{ joke.rating }}">
+                <div id="rating"
+                  style="width:{% widthratio joke.rating 10 100 %}%;"></div>
+              </div>
+                ({{ joke.num_votes }} vote{{ joke.num_votes|pluralize }})
             </td>
           </tr>
         {% endfor %}
